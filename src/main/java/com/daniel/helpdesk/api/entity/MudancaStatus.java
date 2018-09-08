@@ -26,7 +26,7 @@ public class MudancaStatus {
 	@DBRef
 	private Usuario usuarioAlteracao;
 	
-	private Date data;
+	private Date dataMudancaStatus;
 	
 	private StatusEnum status;
 }
