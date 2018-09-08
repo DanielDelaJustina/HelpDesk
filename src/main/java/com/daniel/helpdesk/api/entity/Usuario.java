@@ -11,12 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.daniel.helpdesk.api.enums.ProfileEnum;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Document
-@Getter
-@Setter
 public class Usuario {
 
 	@Id
@@ -32,5 +27,21 @@ public class Usuario {
 	private String senha;
 	
 	private ProfileEnum profile;
+
+	public String getId() {
+		return id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public ProfileEnum getProfile() {
+		return profile;
+	}	
 	
 }
