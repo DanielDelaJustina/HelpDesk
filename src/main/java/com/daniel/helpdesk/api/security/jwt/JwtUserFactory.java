@@ -1,6 +1,6 @@
 package com.daniel.helpdesk.api.security.jwt;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 import com.daniel.helpdesk.api.enums.ProfileEnum;
 
 import java.util.ArrayList;
@@ -17,9 +17,9 @@ public class JwtUserFactory {
 	}
 	
 	
-	public static JwtUser create(Usuario user) {
+	public static JwtUser create(User user) {
 		
-		return new JwtUser(user.getId(),user.getEmail(),user.getSenha(),
+		return new JwtUser(user.getId(),user.getEmail(),user.getPassword(),
 						   mapToGrantedAuthorities(user.getProfile()));
 	}
 	

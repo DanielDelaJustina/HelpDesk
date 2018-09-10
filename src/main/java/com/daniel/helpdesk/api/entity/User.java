@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.daniel.helpdesk.api.enums.ProfileEnum;
 
 @Document
-public class Usuario {
+public class User {
 
 	@Id
 	private String id;
@@ -24,7 +24,7 @@ public class Usuario {
 	
 	@NotBlank(message = "Senha Obrigatório")
 	@Size(min=6)
-	private String senha;
+	private String password;
 	
 	private ProfileEnum profile;
 
@@ -36,8 +36,8 @@ public class Usuario {
 		return email;
 	}
 
-	public String getSenha() {
-		return senha;
+	public String getPassword() {
+		return password;
 	}
 
 	public ProfileEnum getProfile() {
@@ -52,8 +52,8 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public void setProfile(ProfileEnum profile) {

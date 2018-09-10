@@ -3,19 +3,21 @@ package com.daniel.helpdesk.api.service;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 
+@Component
 public interface UsuarioService {
 
 	
-	Usuario findByEmail(String email);
+	User findByEmail(String email);
 	
-	Usuario createOrUpdate(Usuario usuario);
+	User createOrUpdate(User usuario);
 	
-	Optional<Usuario> findById(String id);
+	Optional<User> findById(String id);
 	
 	void delete(String id);
 	
-	Page<Usuario> findAll(int page, int count);
+	Page<User> findAll(int page, int count);
 }

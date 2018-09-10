@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 import com.daniel.helpdesk.api.enums.ProfileEnum;
 import com.daniel.helpdesk.api.repository.UsuarioRepository;
 
@@ -25,12 +25,12 @@ public class HelpDeskApplication {
 	}
 	
 	private void initUsers(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder) {
-		Usuario admin = new Usuario();
-		admin.setEmail("dd.justina@hotmail.com");
-		admin.setSenha(passwordEncoder.encode("leinad"));
+		User admin = new User();
+		admin.setEmail("admin@helpdesk.com");
+		admin.setPassword(passwordEncoder.encode("123456"));
 		admin.setProfile(ProfileEnum.ROLE_ADMIN);
 		
-		Usuario find = usuarioRepository.findByEmail("dd.justina@hotmail.com");
+		User find = usuarioRepository.findByEmail("admin@helpdesk.com");
 		if(find == null) {
 			usuarioRepository.save(admin);
 		}

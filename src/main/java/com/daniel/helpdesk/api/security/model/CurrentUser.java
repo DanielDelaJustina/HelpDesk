@@ -1,13 +1,13 @@
 package com.daniel.helpdesk.api.security.model;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 
 public class CurrentUser {
 
 	private String token;
-	private Usuario user;
+	private User user;
 	
-	public CurrentUser(String token, Usuario user) {
+	public CurrentUser(String token, User user) {
 		super();
 		this.token = token;
 		this.user = user;
@@ -21,11 +21,11 @@ public class CurrentUser {
 		this.token = token;
 	}
 
-	public Usuario getUser() {
+	public User getUser() {
 		return user;
 	}
 
-	public void setUser(Usuario user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 	

@@ -21,7 +21,7 @@ public class Chamado {
 	private String id;
 	
 	@DBRef(lazy = true)
-	private Usuario usuario;
+	private User usuario;
 	
 	private Date data;
 	
@@ -34,7 +34,7 @@ public class Chamado {
 	private PrioridadeEnum prioridade;
 	
 	@DBRef(lazy = true)
-	private Usuario usuarioAtribuido;
+	private User usuarioAtribuido;
 
 	private String descricao;
 	
@@ -51,11 +51,11 @@ public class Chamado {
 		this.id = id;
 	}
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 
@@ -99,11 +99,11 @@ public class Chamado {
 		this.prioridade = prioridade;
 	}
 
-	public Usuario getUsuarioAtribuido() {
+	public User getUsuarioAtribuido() {
 		return usuarioAtribuido;
 	}
 
-	public void setUsuarioAtribuido(Usuario usuarioAtribuido) {
+	public void setUsuarioAtribuido(User usuarioAtribuido) {
 		this.usuarioAtribuido = usuarioAtribuido;
 	}
 

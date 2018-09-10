@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 import com.daniel.helpdesk.api.security.jwt.JwtAuthenticationRequest;
 import com.daniel.helpdesk.api.security.jwt.JwtTokenUtil;
 import com.daniel.helpdesk.api.security.model.CurrentUser;
@@ -50,8 +50,8 @@ public class AuthenticationRestController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
-        final Usuario user = userService.findByEmail(authenticationRequest.getEmail());
-        user.setSenha(null);
+        final User user = userService.findByEmail(authenticationRequest.getEmail());
+        user.setPassword(null);
         return ResponseEntity.ok(new CurrentUser(token, user));
     }
 
@@ -59,11 +59,11 @@ public class AuthenticationRestController {
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader("Authorization");
         String username = jwtTokenUtil.getUserNameFromToken(token);
-        final Usuario user = userService.findByEmail(username);
+        final User user = userService.findByEmail(username);
         
         if (jwtTokenUtil.canTokenBeRefreshed(token)) {
-            String refreshToken = jwtTokenUtil.refreshToken(token);
-            return ResponseEntity.ok(new CurrentUser(refreshToken, user));
+            String refreshedToken = jwtTokenUtil.refreshToken(token);
+            return ResponseEntity.ok(new CurrentUser(refreshedToken, user));
         } else {
             return ResponseEntity.badRequest().body(null);
         }

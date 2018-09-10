@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 import com.daniel.helpdesk.api.repository.UsuarioRepository;
 import com.daniel.helpdesk.api.service.UsuarioService;
 
@@ -20,17 +20,17 @@ public class UsuarioServiceImp implements UsuarioService{
 	
 	
 	@Override
-	public Usuario findByEmail(String email) {
+	public User findByEmail(String email) {
 		return this.usuarioRepository.findByEmail(email);
 	}
 
 	@Override
-	public Usuario createOrUpdate(Usuario usuario) {
+	public User createOrUpdate(User usuario) {
 		return this.usuarioRepository.save(usuario);
 	}
 
 	@Override
-	public Optional<Usuario> findById(String id) {
+	public Optional<User> findById(String id) {
 		return this.usuarioRepository.findById(id);
 	}
 
@@ -40,7 +40,7 @@ public class UsuarioServiceImp implements UsuarioService{
 	}
 
 	@Override
-	public Page<Usuario> findAll(int page, int count) {
+	public Page<User> findAll(int page, int count) {
 		
 		PageRequest pageRequest =  PageRequest.of(page,count);
 		return usuarioRepository.findAll(pageRequest);

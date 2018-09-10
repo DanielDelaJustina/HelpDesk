@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 import com.daniel.helpdesk.api.security.jwt.JwtUserFactory;
 import com.daniel.helpdesk.api.service.UsuarioService;
 
@@ -17,7 +17,7 @@ public class JwtUserDetailsImp implements UserDetailsService{
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		
-		Usuario user = userService.findByEmail(email);
+		User user = userService.findByEmail(email);
 		
 		if(user == null) {
 			throw new UsernameNotFoundException(String.format("Usuário nao encontrado '%s'.", email));

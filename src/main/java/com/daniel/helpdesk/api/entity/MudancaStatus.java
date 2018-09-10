@@ -24,7 +24,7 @@ public class MudancaStatus {
 	private Chamado chamado;
 
 	@DBRef
-	private Usuario usuarioAlteracao;
+	private User usuarioAlteracao;
 	
 	private Date dataMudancaStatus;
 	
@@ -46,11 +46,11 @@ public class MudancaStatus {
 		this.chamado = chamado;
 	}
 
-	public Usuario getUsuarioAlteracao() {
+	public User getUsuarioAlteracao() {
 		return usuarioAlteracao;
 	}
 
-	public void setUsuarioAlteracao(Usuario usuarioAlteracao) {
+	public void setUsuarioAlteracao(User usuarioAlteracao) {
 		this.usuarioAlteracao = usuarioAlteracao;
 	}
 

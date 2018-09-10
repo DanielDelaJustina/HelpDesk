@@ -2,9 +2,9 @@ package com.daniel.helpdesk.api.repository;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-import com.daniel.helpdesk.api.entity.Usuario;
+import com.daniel.helpdesk.api.entity.User;
 
-public interface UsuarioRepository extends MongoRepository<Usuario, String> {
+public interface UsuarioRepository extends MongoRepository<User, String> {
 
-	Usuario findByEmail(String email);
+	User findByEmail(String email);
 }
