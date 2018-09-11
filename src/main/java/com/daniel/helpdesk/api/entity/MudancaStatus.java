@@ -22,7 +22,10 @@ public class MudancaStatus {
 	
 	@DBRef
 	private Chamado chamado;
-
+	
+	@DBRef
+	private User usuario;
+	
 	@DBRef
 	private User usuarioAlteracao;
 	
@@ -70,6 +73,12 @@ public class MudancaStatus {
 		this.status = status;
 	}
 	
-	
+	public User getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(User usuario) {
+		this.usuario = usuario;
+	}
 	
 }

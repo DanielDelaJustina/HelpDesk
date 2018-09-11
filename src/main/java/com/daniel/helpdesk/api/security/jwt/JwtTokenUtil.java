@@ -75,6 +75,7 @@ public class JwtTokenUtil implements Serializable{
 		claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
 		
 		final Date createdDate = new Date();
+		claims.put(CLAIM_KEY_CREATED, createdDate);
 		return doGenerateToKen(claims);		
 	}
 	

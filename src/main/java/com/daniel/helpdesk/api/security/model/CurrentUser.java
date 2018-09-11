@@ -8,7 +8,6 @@ public class CurrentUser {
 	private User user;
 	
 	public CurrentUser(String token, User user) {
-		super();
 		this.token = token;
 		this.user = user;
 	}

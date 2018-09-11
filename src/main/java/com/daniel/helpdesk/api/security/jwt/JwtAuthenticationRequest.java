@@ -28,7 +28,7 @@ public class JwtAuthenticationRequest implements Serializable{
 
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 

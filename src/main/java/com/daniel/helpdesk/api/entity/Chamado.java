@@ -11,9 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import com.daniel.helpdesk.api.enums.PrioridadeEnum;
 import com.daniel.helpdesk.api.enums.StatusEnum;
 
-import lombok.Getter;
-import lombok.Setter;
-
 @Document
 public class Chamado {
 	
