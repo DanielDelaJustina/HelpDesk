@@ -5,5 +5,5 @@ public enum ProfileEnum {
 	
 	ROLE_ADMIN,
 	ROLE_CUSTOMER,
-	ROLE_TECNICAL
+	ROLE_TECHNICIAN
 }
