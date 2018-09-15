@@ -16,11 +16,11 @@ public interface ChamadoRepository extends MongoRepository<Chamado, String>{
 			String titulo, String status, String prioridade, Pageable pages);
 			
 	Page<Chamado> findByTituloIgnoreCaseContainingAndStatusAndPrioridadeAndUsuarioIdOrderByDataDesc(
-			String titulo, String status, String prioridade, Pageable pages);
+			String titulo, String status, String prioridade, String userId, Pageable pages);
 	
 	
 	Page<Chamado> findByTituloIgnoreCaseContainingAndStatusAndPrioridadeAndUsuarioAtribuidoIdOrderByDataDesc(
-			String titulo, String status, String prioridade, Pageable pages);
+			String titulo, String status, String prioridade, String userId, Pageable pages);
 	
 	Page<Chamado> findByNumero(Integer numero,Pageable pages);
 	

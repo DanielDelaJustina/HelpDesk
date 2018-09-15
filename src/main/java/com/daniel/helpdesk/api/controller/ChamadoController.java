@@ -206,6 +206,7 @@ public class ChamadoController {
 		
 		Response<Page<Chamado>> response = new Response<Page<Chamado>>();
 		Page<Chamado> tickets = null;
+		
 		if(number > 0) {
 			tickets = ticketService.findByNumber(page, count, number);
 		} else {
@@ -276,7 +277,7 @@ public class ChamadoController {
 	@GetMapping(value = "/summary")
 	public ResponseEntity<Response<Summary>> findChart() {
 		Response<Summary> response = new Response<Summary>();
-		Summary chart = new Summary();
+		Summary totais = new Summary();
 		int amountNew = 0;
 		int amountResolved = 0;
 		int amountApproved = 0;
@@ -307,13 +308,13 @@ public class ChamadoController {
 				}
 			}	
 		}
-		chart.setamountNew(amountNew);
-		chart.setamountResolved(amountResolved);
-		chart.setamountApproved(amountApproved);
-		chart.setamountDisapproved(amountDisapproved);
-		chart.setamountAssigned(amountAssigned);
-		chart.setamountClosed(amountClosed);
-		response.setData(chart);
+		totais.setamountNew(amountNew);
+		totais.setamountResolved(amountResolved);
+		totais.setamountApproved(amountApproved);
+		totais.setamountDisapproved(amountDisapproved);
+		totais.setamountAssigned(amountAssigned);
+		totais.setamountClosed(amountClosed);
+		response.setData(totais);
 		return ResponseEntity.ok(response);
 	}
 

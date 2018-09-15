@@ -72,7 +72,7 @@ public class ChamadoServiceImpl implements ChamadoService{
 			String priority, String userId) {
 		Pageable pages = PageRequest.of(page, count);
 		return this.chamadoRepository.
-				findByTituloIgnoreCaseContainingAndStatusAndPrioridadeAndUsuarioIdOrderByDataDesc(title, status, priority, pages);
+				findByTituloIgnoreCaseContainingAndStatusAndPrioridadeAndUsuarioIdOrderByDataDesc(title, status, priority, userId, pages);
 	}
 
 	@Override
@@ -91,7 +91,7 @@ public class ChamadoServiceImpl implements ChamadoService{
 			String priority, String assignedUserId) {
 		
 		Pageable pages = PageRequest.of(page, count);		
-		return this.chamadoRepository.findByTituloIgnoreCaseContainingAndStatusAndPrioridadeAndUsuarioAtribuidoIdOrderByDataDesc(title, status, priority, pages);
+		return this.chamadoRepository.findByTituloIgnoreCaseContainingAndStatusAndPrioridadeAndUsuarioAtribuidoIdOrderByDataDesc(title, status, priority, assignedUserId, pages);
 	}
 
 }
