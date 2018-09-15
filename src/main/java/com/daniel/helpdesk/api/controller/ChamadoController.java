@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.daniel.helpdesk.api.dto.Summary;
 import com.daniel.helpdesk.api.entity.Chamado;
 import com.daniel.helpdesk.api.entity.MudancaStatus;
 import com.daniel.helpdesk.api.entity.User;
@@ -169,16 +170,16 @@ public class ChamadoController {
 		return ResponseEntity.ok(new Response<String>());
 	}
 	
-	/*
+
 	
 	@GetMapping(value = "{page}/{count}")
 	@PreAuthorize("hasAnyRole('CUSTOMER','TECHNICIAN')")
-    public  ResponseEntity<Response<Page<Ticket>>> findAll(HttpServletRequest request, @PathVariable int page, @PathVariable int count) {
+    public  ResponseEntity<Response<Page<Chamado>>> findAll(HttpServletRequest request, @PathVariable("page") int page, @PathVariable("count") int count) {
 		
 		Response<Page<Chamado>> response = new Response<Page<Chamado>>();
 		Page<Chamado> tickets = null;
 		User userRequest = userFromRequest(request);
-		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECNICAL)) {
+		if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
 			tickets = ticketService.listTicket(page, count);
 		} else if(userRequest.getProfile().equals(ProfileEnum.ROLE_CUSTOMER)) {
 			tickets = ticketService.findByCurrentUser(page, count, userRequest.getId());
@@ -187,16 +188,17 @@ public class ChamadoController {
 		return ResponseEntity.ok(response);
     }
 	
+	
 	@GetMapping(value = "{page}/{count}/{number}/{title}/{status}/{priority}/{assigned}")
 	@PreAuthorize("hasAnyRole('CUSTOMER','TECHNICIAN')")
     public  ResponseEntity<Response<Page<Chamado>>> findByParams(HttpServletRequest request, 
-    		 							@PathVariable int page, 
-    		 							@PathVariable int count,
-    		 							@PathVariable Integer number,
-    		 							@PathVariable String title,
-    		 							@PathVariable String status,
-    		 							@PathVariable String priority,
-    		 							@PathVariable boolean assigned) {
+    									@PathVariable("page") int page, 
+    									@PathVariable("count") int count,
+    									@PathVariable("number") Integer number,
+    									@PathVariable("title") String title,
+    									@PathVariable("status") String status,
+    									@PathVariable("priority") String priority,
+    									@PathVariable("assigned") boolean assigned) {
 		
 		title = title.equals("uninformed") ? "" : title;
 		status = status.equals("uninformed") ? "" : status;
@@ -208,7 +210,7 @@ public class ChamadoController {
 			tickets = ticketService.findByNumber(page, count, number);
 		} else {
 			User userRequest = userFromRequest(request);
-			if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECNICAL)) {
+			if(userRequest.getProfile().equals(ProfileEnum.ROLE_TECHNICIAN)) {
 				if(assigned) {
 					tickets = ticketService.findByParametersAndAssignedUser(page, count, title, status, priority, userRequest.getId());
 				} else {
@@ -221,6 +223,7 @@ public class ChamadoController {
 		response.setData(tickets);
 		return ResponseEntity.ok(response);
     }
+	
 	
 	@PutMapping(value = "/{id}/{status}")
 	@PreAuthorize("hasAnyRole('CUSTOMER','TECHNICIAN')")
@@ -240,7 +243,7 @@ public class ChamadoController {
 			}
 			Optional<Chamado> ticketCurrentOptional = ticketService.findById(id);
 			Chamado ticketCurrent = ticketCurrentOptional.get();
-			ticketCurrent.setStatus(StatusEnum.getStatus(status));
+			ticketCurrent.setStatus(StatusEnum.valueOf(status));
 			if(status.equals("Assigned")) {
 				ticketCurrent.setUsuarioAtribuido(userFromRequest(request));
 			}
@@ -248,7 +251,7 @@ public class ChamadoController {
 			MudancaStatus changeStatus = new MudancaStatus();
 			changeStatus.setUsuarioAlteracao(userFromRequest(request));
 			changeStatus.setDataMudancaStatus(new Date());
-			changeStatus.setStatus(StatusEnum.getStatus(status));
+			changeStatus.setStatus(StatusEnum.valueOf(status));
 			changeStatus.setChamado(ticketPersisted);
 			ticketService.createChangeStatus(changeStatus);
 			response.setData(ticketPersisted);
@@ -280,38 +283,38 @@ public class ChamadoController {
 		int amountDisapproved = 0;
 		int amountAssigned = 0;
 		int amountClosed = 0;
-		Iterable<Ticket> tickets = ticketService.findAll();
+		Iterable<Chamado> tickets = ticketService.findAll();
 		if (tickets != null) {
-			for (Iterator<Ticket> iterator = tickets.iterator(); iterator.hasNext();) {
-				Ticket ticket = iterator.next();
-				if(ticket.getStatus().equals(StatusEnum.New)){
+			for (Iterator<Chamado> iterator = tickets.iterator(); iterator.hasNext();) {
+				Chamado ticket = iterator.next();
+				if(ticket.getStatus().equals(StatusEnum.NOVO)){
 					amountNew ++;
 				}
-				if(ticket.getStatus().equals(StatusEnum.Resolved)){
+				if(ticket.getStatus().equals(StatusEnum.RESOLVIDO)){
 					amountResolved ++;
 				}
-				if(ticket.getStatus().equals(StatusEnum.Approved)){
+				if(ticket.getStatus().equals(StatusEnum.APROVADO)){
 					amountApproved ++;
 				}
-				if(ticket.getStatus().equals(StatusEnum.Disapproved)){
+				if(ticket.getStatus().equals(StatusEnum.DESIGNADO)){
 					amountDisapproved ++;
 				}
-				if(ticket.getStatus().equals(StatusEnum.Assigned)){
+				if(ticket.getStatus().equals(StatusEnum.REPROVADO)){
 					amountAssigned ++;
 				}
-				if(ticket.getStatus().equals(StatusEnum.Closed)){
+				if(ticket.getStatus().equals(StatusEnum.FECHAR)){
 					amountClosed ++;
 				}
 			}	
 		}
-		chart.setAmountNew(amountNew);
-		chart.setAmountResolved(amountResolved);
-		chart.setAmountApproved(amountApproved);
-		chart.setAmountDisapproved(amountDisapproved);
-		chart.setAmountAssigned(amountAssigned);
-		chart.setAmountClosed(amountClosed);
+		chart.setamountNew(amountNew);
+		chart.setamountResolved(amountResolved);
+		chart.setamountApproved(amountApproved);
+		chart.setamountDisapproved(amountDisapproved);
+		chart.setamountAssigned(amountAssigned);
+		chart.setamountClosed(amountClosed);
 		response.setData(chart);
 		return ResponseEntity.ok(response);
 	}
-*/	
+
 }
